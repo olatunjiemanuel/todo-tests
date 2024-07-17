@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+// component imports
+import NewTodoForm from "./components/newTodoForm";
+import ToDoList from "./components/toDoList";
+
+interface TodoItem {
+  title: string;
+  completed: boolean;
+}
 
 function App() {
+  const [newTodo, setNewTodo] = useState("");
+  const [itemsList, setItemsList] = useState<TodoItem[]>([]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setItemsList((currentItems) => {
+      return [...currentItems, { title: newTodo, completed: false }];
+    });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NewTodoForm
+        handleSubmit={handleSubmit}
+        setNewTodo={setNewTodo}
+        newTodo={newTodo}
+      />
+      {itemsList.length === 0 && <p>No items to show</p>}
+      <ToDoList itemsList={itemsList} />
+    </>
   );
 }
 
