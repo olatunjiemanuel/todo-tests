@@ -39,20 +39,22 @@ function App() {
   }, [theme]);
   return (
     <ThemeProvider value={{ theme, darkTheme, lightTheme }}>
-      <button onClick={() => setTheme("dark")}>Dark</button>
-      <button onClick={() => setTheme("light")}>Light</button>
-      <body className={theme === "light" ? "light-mode" : "dark-mode"}>
-        <NewTodoForm
-          handleSubmit={handleSubmit}
-          setNewTodo={setNewTodo}
-          newTodo={newTodo}
-        />
-        {itemsList.length === 0 && <p>No items to show</p>}
-        <ToDoList itemsList={itemsList} />
+      <>
+        <button onClick={() => setTheme("dark")}>Dark</button>
+        <button onClick={() => setTheme("light")}>Light</button>
+        <body className={theme === "light" ? "light-mode" : "dark-mode"}>
+          <NewTodoForm
+            handleSubmit={handleSubmit}
+            setNewTodo={setNewTodo}
+            newTodo={newTodo}
+          />
+          {itemsList.length === 0 && <p>No items to show</p>}
+          <ToDoList itemsList={itemsList} />
 
-        <FunctionalTimer timerStartValue={20} />
-        <ClassicalTimer timerStartValue={50} />
-      </body>
+          <FunctionalTimer timerStartValue={20} />
+          <ClassicalTimer timerStartValue={50} />
+        </body>
+      </>
     </ThemeProvider>
   );
 }

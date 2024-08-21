@@ -12,8 +12,12 @@
   transition: 0.3s;
 }
 
+.app-container {
+  background-color: #000;
+  flex: 1;
+}
+
 body {
-  margin: 50px;
   background-color: var(--background-color);
   color: var(--color);
   padding: 20px;

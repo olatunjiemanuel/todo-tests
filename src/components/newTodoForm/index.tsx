@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { useEffect, useRef, FormEvent } from "react";
 // import styles from "./styles";
 import "./styles.css";
 
@@ -17,6 +17,13 @@ const NewTodoForm = ({
   newTodo,
 }: newTodoFormProps) => {
   const { theme } = useTheme();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   return (
     <form
@@ -27,6 +34,7 @@ const NewTodoForm = ({
         Add a to-do item here
       </label>
       <input
+        ref={inputRef}
         type="text"
         id="add-todo"
         value={newTodo}
