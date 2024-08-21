@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 // component imports
@@ -20,7 +20,9 @@ interface TodoItem {
 function App() {
   const [newTodo, setNewTodo] = useState("");
   const [itemsList, setItemsList] = useState<TodoItem[]>([]);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("remTheme") || "light"
+  );
 
   const darkTheme = () => setTheme("dark");
   const lightTheme = () => setTheme("light");
@@ -31,6 +33,10 @@ function App() {
       return [...currentItems, { title: newTodo, completed: false }];
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem("remTheme", theme);
+  }, [theme]);
   return (
     <ThemeProvider value={{ theme, darkTheme, lightTheme }}>
       <button onClick={() => setTheme("dark")}>Dark</button>
