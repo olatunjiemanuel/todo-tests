@@ -1,0 +1,29 @@
+.dark-theme {
+  --background-color: #000;
+  --color: #fff;
+}
+
+.default {
+  --background-color: #fff;
+  --color: #000;
+}
+
+.newToDoForm {
+  color: red;
+}
+
+* {
+  transition: 0.3s;
+}
+
+.form-container {
+  background-color: var(--background-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+@media (max-width: 300px) {
+  .newToDoForm {
+    color: blue;
+  }
+}
